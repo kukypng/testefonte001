@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>kuky.png</title>
+
+<style>
+
+@font-face {
+
+  font-family: 'MinhaFonte';
+
+  src: url('minhafonte.otf') format('opentype');
+
+}
+
+#bloco-notas {
+
+  font-family: 'MinhaFonte', sans-serif; /* Fonte padrão */
+
+  font-size: 16px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+  <input type="file" id="fontFile" accept=".otf">
+
+  <textarea id="bloco-notas"></textarea>
+
+
+
+  <script>
+
+    const fontFile = document.getElementById('fontFile');
+
+    const blocoNotas = document.getElementById('bloco-notas');
+
+
+
+    fontFile.addEventListener('change', () => {
+
+      const file = fontFile.files[0];
+
+      const reader = new FileReader();
+
+
+
+      reader.onload = (e) => {
+
+        const newFont = new FontFace('NovaFonte', e.target.result);
+
+        newFont.load().then(() => {
+
+          document.fonts.add(newFont);
+
+          blocoNotas.style.fontFamily = 'NovaFonte, sans-serif';
+
+        });
+
+      };
+
+
+
+      reader.readAsArrayBuffer(file);
+
+    });
+
+  </script>
+
+</body>
+
+</html>
+
